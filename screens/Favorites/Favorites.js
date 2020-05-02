@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 
 // Component
-const Favorite = () => {
+const Favorites = () => {
     return (
         <View style={styles.screen}>
             <Text>Favorite screen</Text>
@@ -25,4 +25,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default Favorite;
+export default Favorites;
