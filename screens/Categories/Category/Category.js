@@ -1,29 +1,39 @@
 // React
 import React from 'react';
 // React Native
-import { StyleSheet, View, Text, Button } from 'react-native';
+import {
+    StyleSheet,
+    View,
+    FlatList
+} from 'react-native';
 
 // Data
-import { CATEGORIES } from '../../../data/dummy-data';
+import { CATEGORIES, MEALS } from '../../../data/dummy-data';
+// Components
+import MealItem from '../../../components/MealItem/MealItem';
 
 // Component
 const Category = ({ navigation }) => {
     const id = navigation.getParam('id');
-    const category = CATEGORIES.find(cat => cat.id === id);
+    const displayMeals = MEALS.filter(meal => meal.categoryIds.indexOf(id) >= 0);
+
+    const renderMealItem = ({item}) => <MealItem
+                                            title={item.title}
+                                            image={item.imageUrl}
+                                            duration={item.duration}
+                                            complexity={item.complexity.toUpperCase()}
+                                            affordability={item.affordability.toUpperCase()}
+                                            onSelect={() => {
+                                                navigation.navigate('MealsDetails', { id: item.id });
+                                            }} />;
 
     return (
         <View style={styles.screen}>
-            <Text>Category screen</Text>
-            <Text>{category.title}</Text>
-            <Button
-                title="Go To Details"
-                onPress={() => navigation.navigate('MealsDetails')}
-            />
-
-            <Button 
-                title="Go Back"
-                // or navigation.pop()
-                onPress={() => navigation.goBack()}
+            <FlatList
+                data={displayMeals}
+                keyExtractor={item => item.id}
+                renderItem={renderMealItem}
+                style={{ width: '100%' }}
             />
         </View>
     );
@@ -31,15 +41,15 @@ const Category = ({ navigation }) => {
 
 
 Category.navigationOptions = navigationData => {
-    const id = navigation.getParam('id');
+    const id = navigationData.navigation.getParam('id');
     const category = CATEGORIES.find(cat => cat.id === id);
 
     return {
         headerTitle: category.title,
-        headerStyle: {
-            backgroundColor: Platform.OS === 'android' ? Colors.primary : ''
-        },
-        headerTintColor: Platform.OS === 'android' ? 'white' : Colors.primary
+        // headerStyle: {
+        //     backgroundColor: Platform.OS === 'android' ? Colors.primary : ''
+        // },
+        // headerTintColor: Platform.OS === 'android' ? 'white' : Colors.primary
         };
 };
 
@@ -48,7 +58,8 @@ const styles = StyleSheet.create({
     screen: {
         flex: 1,
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
+        padding: 15
     }
 });
 

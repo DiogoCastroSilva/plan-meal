@@ -3,37 +3,25 @@ import React from 'react';
 // React Native
 import {
     StyleSheet,
-    FlatList,
-    View,
-    Text,
-    Platform,
-    TouchableOpacity
+    FlatList
 } from 'react-native';
 
 // Dummy Data
 import { CATEGORIES } from '../../data/dummy-data';
-import Colors from '../../constants/styles/Colors';
+import CategoryGrid from '../../components/CategoriesGrid/CategoryGrid';
 
 // Component
 const Categories = ({ navigation }) => {
 
     // Item Interface
-    const renderGridItem = ({item}) => {
-        return (
-            <TouchableOpacity
-                style={styles.item}
-                // or navigation.navigate('Category', { })
-                onPress={() => navigation.navigate({
-                    routeName: 'Category',
-                    params: { id: item.id }
-                })}
-            >
-                <View>
-                    <Text>{item.title}</Text>
-                </View>
-            </TouchableOpacity>
-        );
-    };
+    const renderGridItem = ({item}) => <CategoryGrid
+                                            title={item.title}
+                                            color={item.color}
+                                            onSelect={() => navigation.navigate({
+                                                routeName: 'Category',
+                                                params: { id: item.id }
+                                            })}
+                                        />;
 
     // Component View
     return (<FlatList
@@ -44,13 +32,13 @@ const Categories = ({ navigation }) => {
             />);
 };
 
-Categories.navigationOptions = {
-    headerTitle: 'Meal Categories',
-    headerStyle: {
-        backgroundColor: Platform.OS === 'android' ? Colors.primary : ''
-    },
-    headerTintColor: Platform.OS === 'android' ? 'white' : Colors.primary
-};
+// Categories.navigationOptions = {
+//     headerTitle: 'Meal Categories',
+//     headerStyle: {
+//         backgroundColor: Platform.OS === 'android' ? Colors.primary : ''
+//     },
+//     headerTintColor: Platform.OS === 'android' ? 'white' : Colors.primary
+// };
 
 // Styles
 const styles = StyleSheet.create({

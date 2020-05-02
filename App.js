@@ -6,7 +6,10 @@ import { Text, View } from 'react-native';
 import { AppLoading } from 'expo';
 import * as Fonts from 'expo-font';
 import MealsNavigator from './navigation/MealsNavigator';
+import { enableScreens } from 'react-native-screens';
 
+
+enableScreens();
 
 // Location of the Fonts
 const fetchFonts = () => {
