@@ -18,13 +18,18 @@ import Colors from '../../constants/styles/Colors';
 const Categories = ({ navigation }) => {
 
     // Item Interface
-    const renderGridItem = (item) => {
+    const renderGridItem = ({item}) => {
         return (
             <TouchableOpacity
                 style={styles.item}
-                onPress={() => navigation.navigate({ routeName: 'Category'})}>
+                // or navigation.navigate('Category', { })
+                onPress={() => navigation.navigate({
+                    routeName: 'Category',
+                    params: { id: item.id }
+                })}
+            >
                 <View>
-                    <Text>{item.item.title}</Text>
+                    <Text>{item.title}</Text>
                 </View>
             </TouchableOpacity>
         );
