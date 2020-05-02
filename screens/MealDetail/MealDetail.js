@@ -7,12 +7,17 @@ import {
     Text,
     Button
 } from 'react-native';
-import { FlatList } from 'react-native-gesture-handler';
 
 // Component
 const MealDetail = ({ navigation }) => {
     return (
-        <FlatList numColumns={2} />
+        <View style={styles.screen}>
+            <Text>MealDetail screen</Text>
+            <Button
+                title="Go Back to Categories"
+                onPress={() => navigation.popToTop()}
+            />
+        </View>
     );
 };
 

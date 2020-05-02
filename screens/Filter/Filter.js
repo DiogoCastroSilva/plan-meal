@@ -1,7 +1,11 @@
 // React
 import React from 'react';
 // React Native
-import { StyleSheet, View, Text } from 'react-native';
+import {
+    StyleSheet,
+    View,
+    Text
+} from 'react-native';
 
 // Component
 const Filter = () => {
