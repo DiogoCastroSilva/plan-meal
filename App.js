@@ -5,6 +5,7 @@ import { Text, View } from 'react-native';
 // Expo
 import { AppLoading } from 'expo';
 import * as Fonts from 'expo-font';
+import MealsNavigator from './navigation/MealsNavigator';
 
 
 // Location of the Fonts
@@ -28,9 +29,5 @@ export default function App() {
   }
 
   // Component View
-  return (
-    <View>
-      <Text>Open up App.js to start working on your app!</Text>
-    </View>
-  );
+  return <MealsNavigator />;
 }

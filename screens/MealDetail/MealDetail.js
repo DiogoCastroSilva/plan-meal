@@ -1,14 +1,18 @@
 // React
 import React from 'react';
 // React Native
-import { StyleSheet, View, Text } from 'react-native';
+import {
+    StyleSheet,
+    View,
+    Text,
+    Button
+} from 'react-native';
+import { FlatList } from 'react-native-gesture-handler';
 
 // Component
-const MealDetail = () => {
+const MealDetail = ({ navigation }) => {
     return (
-        <View style={styles.screen}>
-            <Text>MealDetail screen</Text>
-        </View>
+        <FlatList numColumns={2} />
     );
 };
 
