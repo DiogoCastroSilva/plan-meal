@@ -2,29 +2,27 @@
 import React from 'react';
 // React Native
 import {
-    StyleSheet
+    StyleSheet,
+    View,
+    Text
 } from 'react-native';
 // Navigation
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
-
 // Components
-import MealList from '../../components/MealList/MealList';
 import CustomHeaderButton from '../../components/CustomHeaderButton/CustomHeaderButton';
 
-import { MEALS } from '../../data/dummy-data';
-
 // Component
-const Favorites = ({ navigation }) => {
-    const favMeals = MEALS.filter(meal => meal.id === 'm1' || meal.id === 'm2');
-    return <MealList
-                listData={favMeals}
-                navigation={navigation}
-            />;
+const Filters = () => {
+    return (
+        <View style={styles.screen}>
+            <Text>Filter screen</Text>
+        </View>
+    );
 };
 
-Favorites.navigationOptions = navData => {
+Filters.navigationOptions = navData => {
     return {
-        headerTitle: 'Favourites',
+        headerTitle: 'Filter Meals',
         headerLeft: () => <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
                             <Item
                                 title="Menu"
@@ -43,4 +41,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default Favorites;
+export default Filters;

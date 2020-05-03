@@ -5,10 +5,14 @@ import {
     StyleSheet,
     FlatList
 } from 'react-native';
+// Navigation
+import { Item, HeaderButtons } from 'react-navigation-header-buttons';
 
 // Dummy Data
 import { CATEGORIES } from '../../data/dummy-data';
+// Components
 import CategoryGrid from '../../components/CategoriesGrid/CategoryGrid';
+import CustomHeaderButton from '../../components/CustomHeaderButton/CustomHeaderButton';
 
 // Component
 const Categories = ({ navigation }) => {
@@ -32,13 +36,17 @@ const Categories = ({ navigation }) => {
             />);
 };
 
-// Categories.navigationOptions = {
-//     headerTitle: 'Meal Categories',
-//     headerStyle: {
-//         backgroundColor: Platform.OS === 'android' ? Colors.primary : ''
-//     },
-//     headerTintColor: Platform.OS === 'android' ? 'white' : Colors.primary
-// };
+Categories.navigationOptions = navData => {
+    return { 
+        headerTitle: 'Meal Categories',
+        headerLeft: () => <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
+                            <Item
+                                title="Menu"
+                                iconName="ios-menu"
+                                onPress={() => navData.navigation.toggleDrawer()} />
+                          </HeaderButtons>
+    };
+};
 
 // Styles
 const styles = StyleSheet.create({
