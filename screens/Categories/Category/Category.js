@@ -10,32 +10,19 @@ import {
 // Data
 import { CATEGORIES, MEALS } from '../../../data/dummy-data';
 // Components
-import MealItem from '../../../components/MealItem/MealItem';
+import MealItem from '../../../components/MealList/MealItem/MealItem';
+import MealList from '../../../components/MealList/MealList';
 
 // Component
 const Category = ({ navigation }) => {
     const id = navigation.getParam('id');
     const displayMeals = MEALS.filter(meal => meal.categoryIds.indexOf(id) >= 0);
 
-    const renderMealItem = ({item}) => <MealItem
-                                            title={item.title}
-                                            image={item.imageUrl}
-                                            duration={item.duration}
-                                            complexity={item.complexity.toUpperCase()}
-                                            affordability={item.affordability.toUpperCase()}
-                                            onSelect={() => {
-                                                navigation.navigate('MealsDetails', { id: item.id });
-                                            }} />;
-
     return (
-        <View style={styles.screen}>
-            <FlatList
-                data={displayMeals}
-                keyExtractor={item => item.id}
-                renderItem={renderMealItem}
-                style={{ width: '100%' }}
-            />
-        </View>
+        <MealList
+            listData={displayMeals}
+            navigation={navigation}
+        />
     );
 };
 
@@ -55,12 +42,7 @@ Category.navigationOptions = navigationData => {
 
 // Styles
 const styles = StyleSheet.create({
-    screen: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        padding: 15
-    }
+    
 });
 
 export default Category;
