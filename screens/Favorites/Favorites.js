@@ -2,7 +2,8 @@
 import React from 'react';
 // React Native
 import {
-    StyleSheet
+    StyleSheet,
+    View
 } from 'react-native';
 // Navigation
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
@@ -12,12 +13,20 @@ import { useSelector } from 'react-redux';
 // Components
 import MealList from '../../components/MealList/MealList';
 import CustomHeaderButton from '../../components/CustomHeaderButton/CustomHeaderButton';
+import CustomText from '../../components/CustomText/CustomText';
 
 
 // Component
 const Favorites = ({ navigation }) => {
     const availableMeals = useSelector(state => state.meals.favoriteMeals);
 
+    if (availableMeals.length === 0 || !availableMeals) {
+        return (
+            <View styles={styles.noMealsContent}>
+                <CustomText>No favorite meals found. Start adding some!</CustomText>
+            </View>
+        );
+    }
     return <MealList
                 listData={availableMeals}
                 navigation={navigation}
@@ -38,7 +47,7 @@ Favorites.navigationOptions = navData => {
 
 // Styles
 const styles = StyleSheet.create({
-    screen: {
+    noMealsContent: {
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center'
