@@ -23,7 +23,10 @@ const MealList = ({
                                             complexity={item.complexity.toUpperCase()}
                                             affordability={item.affordability.toUpperCase()}
                                             onSelect={() => {
-                                                navigation.navigate('MealsDetails', { id: item.id });
+                                                navigation.navigate('MealsDetails', {
+                                                    id: item.id,
+                                                    title: item.title
+                                                });
                                             }}
                                         />;
 

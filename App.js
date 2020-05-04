@@ -3,11 +3,21 @@ import React, { useState } from 'react';
 // Expo
 import { AppLoading } from 'expo';
 import * as Fonts from 'expo-font';
-import MealsNavigator from './navigation/MealsNavigator';
 import { enableScreens } from 'react-native-screens';
-
+// Navigation
+import MealsNavigator from './navigation/MealsNavigator';
+// Redux
+import { createStore, combineReducers } from 'redux';
+import { Provider } from 'react-redux';
+import MealsReducer from './store/reducers/meals';
 
 enableScreens();
+
+// State Management
+const rootReducer = combineReducers({
+  meals: MealsReducer
+});
+const store = createStore(rootReducer);
 
 // Location of the Fonts
 const fetchFonts = () => {
@@ -30,5 +40,9 @@ export default function App() {
   }
 
   // Component View
-  return <MealsNavigator />;
+  return (
+    <Provider store={store}>
+      <MealsNavigator />
+    </Provider>
+  );
 }

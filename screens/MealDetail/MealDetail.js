@@ -10,11 +10,12 @@ import {
 } from 'react-native';
 // Navigation
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
+// Redux
+import { useSelector } from 'react-redux';
 // Components
 import CustomHeaderButton from '../../components/CustomHeaderButton/CustomHeaderButton';
 import CustomText from '../../components/CustomText/CustomText';
 
-import { MEALS } from '../../data/dummy-data';
 
 const ListItem = ({children, key}) => {
     return (
@@ -25,9 +26,10 @@ const ListItem = ({children, key}) => {
 };
 // Component
 const MealDetail = ({ navigation }) => {
+    const availableMeals = useSelector(state => state.meals.meals);
     const id = navigation.getParam('id');
-    const meal = MEALS.find(meal => meal.id === id);
-
+    const meal = availableMeals.find(meal => meal.id === id);
+    
     return (
         <ScrollView>
             <Image source={{uri: meal.imageUrl}} style={styles.image} />
@@ -52,11 +54,10 @@ const MealDetail = ({ navigation }) => {
 
 // Header configuration
 MealDetail.navigationOptions = (navigationData) => {
-    const id = navigationData.navigation.getParam('id');
-    const meal = MEALS.find(meal => meal.id === id);
+    const title = navigationData.navigation.getParam('title');
 
     return {
-        headerTitle: meal.title,
+        headerTitle: title,
         headerRight: () => (
             <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
                 <Item title='Favorite' iconName='ios-star' />

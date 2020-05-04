@@ -6,18 +6,20 @@ import {
 } from 'react-native';
 // Navigation
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
+//Redux
+import { useSelector } from 'react-redux';
 
 // Components
 import MealList from '../../components/MealList/MealList';
 import CustomHeaderButton from '../../components/CustomHeaderButton/CustomHeaderButton';
 
-import { MEALS } from '../../data/dummy-data';
 
 // Component
 const Favorites = ({ navigation }) => {
-    const favMeals = MEALS.filter(meal => meal.id === 'm1' || meal.id === 'm2');
+    const availableMeals = useSelector(state => state.meals.favoriteMeals);
+
     return <MealList
-                listData={favMeals}
+                listData={availableMeals}
                 navigation={navigation}
             />;
 };

@@ -2,21 +2,23 @@
 import React from 'react';
 // React Native
 import {
-    StyleSheet,
-    View,
-    FlatList
+    StyleSheet
 } from 'react-native';
+// Redux
+import { useSelector } from 'react-redux';
 
 // Data
-import { CATEGORIES, MEALS } from '../../../data/dummy-data';
+import { CATEGORIES } from '../../../data/dummy-data';
 // Components
-import MealItem from '../../../components/MealList/MealItem/MealItem';
 import MealList from '../../../components/MealList/MealList';
 
 // Component
 const Category = ({ navigation }) => {
     const id = navigation.getParam('id');
-    const displayMeals = MEALS.filter(meal => meal.categoryIds.indexOf(id) >= 0);
+
+    const availableMeals = useSelector(state => state.meals.filteredMeals);
+
+    const displayMeals = availableMeals.filter(meal => meal.categoryIds.indexOf(id) >= 0);
 
     return (
         <MealList
