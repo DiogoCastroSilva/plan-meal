@@ -8,6 +8,8 @@ import {
     TouchableOpacity,
     ImageBackground
 } from 'react-native';
+// Components
+import CustomText from '../../CustomText/CustomText';
 
 // Component
 const MealItem = ({
@@ -30,9 +32,9 @@ const MealItem = ({
                         </ImageBackground>
                     </View>
                     <View style={{ ...styles.row, ...styles.detail }}>
-                        <Text>{duration}</Text>
-                        <Text>{complexity}</Text>
-                        <Text>{affordability}</Text>
+                        <CustomText>{duration}</CustomText>
+                        <CustomText>{complexity}</CustomText>
+                        <CustomText>{affordability}</CustomText>
                     </View>
                 </View>
             </TouchableOpacity>

@@ -1,7 +1,5 @@
 // React
 import React, { useState } from 'react';
-// React Native
-import { Text, View } from 'react-native';
 // Expo
 import { AppLoading } from 'expo';
 import * as Fonts from 'expo-font';
