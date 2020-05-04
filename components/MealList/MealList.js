@@ -9,12 +9,14 @@ import {
 
 // Components
 import MealItem from './MealItem/MealItem';
+import { useSelector } from 'react-redux';
 
 // Component
 const MealList = ({
     listData,
     navigation
 }) => {
+    const favMeals = useSelector(state => state.meals.favotiteMeals);
 
     const renderMealItem = ({item}) => <MealItem
                                             title={item.title}
@@ -25,7 +27,8 @@ const MealList = ({
                                             onSelect={() => {
                                                 navigation.navigate('MealsDetails', {
                                                     id: item.id,
-                                                    title: item.title
+                                                    title: item.title,
+                                                    isFav: favMeals.some(meal => meal.id === item.id)
                                                 });
                                             }}
                                         />;
