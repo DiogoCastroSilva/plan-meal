@@ -1,5 +1,5 @@
 // React
-import React from 'react';
+import React, { useEffect, useCallback } from 'react';
 // React Native
 import {
     StyleSheet,
@@ -11,7 +11,9 @@ import {
 // Navigation
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 // Redux
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { toggleFavorite } from '../../store/actions/meals';
+
 // Components
 import CustomHeaderButton from '../../components/CustomHeaderButton/CustomHeaderButton';
 import CustomText from '../../components/CustomText/CustomText';
@@ -30,6 +32,16 @@ const MealDetail = ({ navigation }) => {
     const id = navigation.getParam('id');
     const meal = availableMeals.find(meal => meal.id === id);
     
+    const dispatch = useDispatch();
+
+    const toggleFavoriteHandler = useCallback(() => {
+        dispatch(toggleFavorite(id));
+    }, [dispatch, id]);
+
+    useEffect(() => {
+        navigation.setParams({ toggleFav: toggleFavoriteHandler });
+    }, [toggleFavoriteHandler]);
+
     return (
         <ScrollView>
             <Image source={{uri: meal.imageUrl}} style={styles.image} />
@@ -53,14 +65,19 @@ const MealDetail = ({ navigation }) => {
 };
 
 // Header configuration
-MealDetail.navigationOptions = (navigationData) => {
+MealDetail.navigationOptions = navigationData => {
     const title = navigationData.navigation.getParam('title');
+    const toggleFav = navigationData.navigation.getParam('toggleFav');
 
     return {
         headerTitle: title,
         headerRight: () => (
             <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
-                <Item title='Favorite' iconName='ios-star' />
+                <Item
+                    title='Favorite'
+                    iconName='ios-star'
+                    onPress={toggleFav}
+                />
             </HeaderButtons>
         )
     };
