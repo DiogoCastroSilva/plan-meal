@@ -13,6 +13,7 @@ import CustomText from '../../CustomText/CustomText';
 
 // Component
 const MealItem = ({
+    key,
     image,
     title,
     duration,
@@ -21,7 +22,7 @@ const MealItem = ({
     onSelect
 }) => {
     return (
-        <View style={styles.container}>
+        <View key={key} style={styles.container}>
             <TouchableOpacity onPress={onSelect}>
                 <View>
                     <View style={{ ...styles.row, ...styles.header }}>

@@ -10,8 +10,12 @@ import {
 } from 'react-native';
 // Navigation
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
+// Redux
+import { useDispatch } from 'react-redux';
+import { setFilters } from '../../store/actions/meals';
 // Components
 import CustomHeaderButton from '../../components/CustomHeaderButton/CustomHeaderButton';
+// Constants
 import Colors from '../../constants/styles/Colors';
 
 
@@ -43,9 +47,7 @@ const Filters = ({ navigation }) => {
     const [isVeganFree, setIsVeganFree] = useState(false);
     const [isVegetarianFree, setIsVegetarianFree] = useState(false);
 
-    useEffect(() => {
-        navigation.setParams({ save: saveFilters });
-    }, [saveFilters]);
+    const dispatch = useDispatch();
 
     const saveFilters = useCallback(() => {
         const appliedFilters = {
@@ -54,7 +56,15 @@ const Filters = ({ navigation }) => {
             vaganFree: isVeganFree,
             vegetarianFree: isVegetarianFree
         };
-    }, [isGlutenFree, isLactoseFree, isVeganFree, isVegetarianFree]);
+
+        dispatch(setFilters(appliedFilters));
+    }, [isGlutenFree, isLactoseFree, isVeganFree, isVegetarianFree, dispatch]);
+
+    useEffect(() => {
+        navigation.setParams({ save: saveFilters });
+    }, [saveFilters]);
+
+    
 
     return (
         <View style={styles.screen}>

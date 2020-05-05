@@ -28,11 +28,11 @@ const ListItem = ({children, key}) => {
 };
 // Component
 const MealDetail = ({ navigation }) => {
+    const id = navigation.getParam('id');
     const availableMeals = useSelector(state => state.meals.meals);
     const isCurrentMealFavorite = useSelector(state =>
         state.meals.favoriteMeals.some(meal => meal.id === id)
     );
-    const id = navigation.getParam('id');
     const meal = availableMeals.find(meal => meal.id === id);
     
     const dispatch = useDispatch();

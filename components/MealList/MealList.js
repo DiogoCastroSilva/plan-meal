@@ -16,9 +16,10 @@ const MealList = ({
     listData,
     navigation
 }) => {
-    const favMeals = useSelector(state => state.meals.favotiteMeals);
+    const favMeals = useSelector(state => state.meals.favoriteMeals);
 
     const renderMealItem = ({item}) => <MealItem
+                                            key={item.id}
                                             title={item.title}
                                             image={item.imageUrl}
                                             duration={item.duration}
